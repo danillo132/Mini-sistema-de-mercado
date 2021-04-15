@@ -1,4 +1,0 @@
-
-Paulo;23;pessoa1@gmail.com
-Ana;34;pessoa2@gmail.com
-Marcos;29;pessoa3@gmail.com
