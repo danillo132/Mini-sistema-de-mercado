@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import beans.BeanCategoria;
+import beans.BeanCursoJsp;
 import beans.BeanProdutos;
 import connection.SingleConnection;
 
@@ -46,10 +47,24 @@ public class daoProdutos {
 		}
 	}
 	
-	public List<BeanProdutos> list() throws Exception{
-		List<BeanProdutos> listar = new ArrayList<BeanProdutos>();
+	public List<BeanProdutos> listarPesquisa(String descricaoconsulta) throws SQLException {
+		String sql = "select * from produtos where nome like '%"+descricaoconsulta+"%'";
 		
-		String sql = "select * from produtos ";
+		return listar(sql);
+	}
+
+	public List<BeanProdutos> listar() throws Exception {
+		
+
+		String sql = "select * from produtos";
+
+		return listar(sql);
+
+		
+	}
+
+	private List<BeanProdutos> listar(String sql) throws SQLException {
+		List<BeanProdutos> listar = new ArrayList<BeanProdutos>();
 		PreparedStatement statement = connection.prepareStatement(sql);
 	   ResultSet set = statement.executeQuery();
 		
@@ -64,9 +79,7 @@ public class daoProdutos {
 			
 			listar.add(beanProdutos);
 		}
-		
 		return listar;
-		
 	}
 	
 	public List<BeanCategoria> listaCategorias() throws Exception{
@@ -154,6 +167,19 @@ public class daoProdutos {
 			
 			return set.getInt("quant") <=0; 
 		}
+		return false;
+	}
+	
+	public boolean validarPesquisaProduto(String descricaoconsulta) throws Exception {
+		String sql =  "select count(1) as user from produtos where nome = '" + descricaoconsulta + "'";
+		PreparedStatement statement = connection.prepareStatement(sql);
+		ResultSet set = statement.executeQuery();
+		
+		if(set.next()) {
+			
+			return set.getInt("user") <=0;
+		}
+		
 		return false;
 	}
 	

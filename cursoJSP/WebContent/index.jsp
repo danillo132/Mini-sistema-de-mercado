@@ -18,6 +18,7 @@
 		<h3>Market System</h3>
 	<img alt="" src="resources/img/carrinho.png">
 			<form action="LoginServlet" method="post" class="login-form">
+			<input  type="hidden"  readonly="readonly" id="url" name="url" value="<%= request.getParameter("url") %>">
 				Login: <input type="text" id="login" name="login"
 					placeholder="Email"> <br> Senha: <br>
 				<input type="password" id="senha" name="senha"

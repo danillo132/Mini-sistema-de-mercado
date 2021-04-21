@@ -13,7 +13,7 @@ import javax.servlet.annotation.WebFilter;
 
 import connection.SingleConnection;
 
-@WebFilter(urlPatterns = {"/*"})
+@WebFilter(urlPatterns = {"/pages/*"})
 public class Filter implements javax.servlet.Filter {
 
 	

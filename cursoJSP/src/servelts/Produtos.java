@@ -39,7 +39,7 @@ public class Produtos extends HttpServlet {
 			if(acao != null && acao.equalsIgnoreCase("delete") && prod != null) {
 				produtos.deletarProd(prod);
 				
-				request.setAttribute("produtos", produtos.list());
+				request.setAttribute("produtos", produtos.listar());
 			}else if(acao != null && acao.equalsIgnoreCase("editar")) {
 				
 				BeanProdutos beanProdutos = produtos.consultar(prod);
@@ -48,10 +48,10 @@ public class Produtos extends HttpServlet {
 				
 			}else if(acao != null && acao.equalsIgnoreCase("listarprodutos")) {
 				
-				request.setAttribute("produtos", produtos.list());
+				request.setAttribute("produtos", produtos.listar());
 			}else {
 				
-				request.setAttribute("produtos", produtos.list());
+				request.setAttribute("produtos", produtos.listar());
 				
 			}
 			
@@ -77,7 +77,7 @@ public class Produtos extends HttpServlet {
 			
 			try {
 			RequestDispatcher view = request.getRequestDispatcher("/cadastroProduto.jsp");
-			request.setAttribute("produtos", produtos.list());
+			request.setAttribute("produtos", produtos.listar());
 			view.forward(request, response);
 			}catch(Exception e){
 				e.printStackTrace();
@@ -145,7 +145,7 @@ public class Produtos extends HttpServlet {
 				
 				
 				RequestDispatcher view = request.getRequestDispatcher("/cadastroProduto.jsp");
-				request.setAttribute("produtos", produtos.list());
+				request.setAttribute("produtos", produtos.listar());
 				request.setAttribute("categoria", produtos.listaCategorias());
 				view.forward(request, response);
 				

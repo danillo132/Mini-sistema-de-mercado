@@ -8,6 +8,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import beans.BeanCursoJsp;
 import dao.DaoLogin;
@@ -40,18 +41,30 @@ public class LoginServlet extends HttpServlet {
 
 			String login = request.getParameter("login");
 			String senha = request.getParameter("senha");
+			String url = request.getParameter("url");
+			beanCursoJsp.setLogin(login);
+			beanCursoJsp.setSenha(senha);
 			
-			if(login != null && !login.isEmpty() && senha != null && !senha.isEmpty()) {
+			
+			if (login != null && !login.isEmpty() && senha != null && !senha.isEmpty()) {
 
-			if (daoLogin.ValidarLogin(login, senha)) {
+				if (daoLogin.ValidarLogin(login, senha)) {
 
-				RequestDispatcher dispatcher = request.getRequestDispatcher("acessoliberado.jsp");
-				dispatcher.forward(request, response);
+					
+					
+					//ADICIONA USUARIO LOGADO NA SESSAO
+					HttpServletRequest req = (HttpServletRequest) request;
+					HttpSession session = req.getSession();
+					session.setAttribute("usuario", beanCursoJsp);
+					
+					RequestDispatcher dispatcher = request.getRequestDispatcher("acessoliberado.jsp");
+					dispatcher.forward(request, response);
+				} else {
+					RequestDispatcher dispatcher = request.getRequestDispatcher("acessonegado.jsp");
+					dispatcher.forward(request, response);
+				}
+
 			} else {
-				RequestDispatcher dispatcher = request.getRequestDispatcher("acessonegado.jsp");
-				dispatcher.forward(request, response);
-			}
-			}else {
 				RequestDispatcher dispatcher = request.getRequestDispatcher("index.jsp");
 				dispatcher.forward(request, response);
 			}

@@ -96,6 +96,34 @@
 		</div>
 
 	</div>
+	
+		<div class="consult-prod">
+		<h3 style="color: white;">${pesquisa}</h3>
+		
+		<div class="consult-produto">
+
+			<h3>Pesquisar Produto</h3>
+
+			<form action="ServletPesquisaProduto" method="post" class="consult-form"
+				id="formConsult" >
+				<table>
+					<tr>
+						<td>Descrição: </td>
+						<td> <input  class="descricao" type="text" id="descricaoconsulta" name="descricaoconsulta" placeholder="Nome do Produto"></td>
+						<td> <button type="submit" value="pesquisar"> Pesquisar</button> </td>
+					</tr>
+					
+
+
+				</table>
+
+				
+			
+				
+			</form>
+		</div>
+	</div>
+	
 
 	<div class="limiter">
 		<div class="container-table100">
