@@ -23,7 +23,7 @@
 		src="resources/img/homie.png"></a></td>
 		
 		<td>MARKET SYSTEM</td>
-		<td><a href="index.jsp"><img alt="logout"
+		<td><a href="salvarProdutos?deslogar=true"><img alt="logout"
 		src="resources/img/logout.png"></a></td>
 </tr>
 

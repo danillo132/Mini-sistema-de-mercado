@@ -16,15 +16,15 @@ import javax.servlet.http.HttpSession;
 import beans.BeanCursoJsp;
 
 
-@WebFilter(urlPatterns = {"/*"})
+@WebFilter(urlPatterns = {"/pages/*"})
 public class FilterAutenticacao implements Filter {
 
 	
-	 // FAZ ALGUMA COISA QUANDO A APLICACAO É DERRUBADA
+	 // FAZ ALGUMA COISA QUANDO A APLICACAO ï¿½ DERRUBADA
 	@Override
 	public void destroy() {
 		
-		Filter.super.destroy();
+		
 	}
 	
 	//INTERCEPTA TODAS AS REQUISICOES
@@ -43,7 +43,7 @@ public class FilterAutenticacao implements Filter {
 		BeanCursoJsp user = (BeanCursoJsp) session.getAttribute("usuario");
 		
 		
-		if(user == null && !urlParaAutenticar.equalsIgnoreCase("/LoginServlet") ) { // usuário nao logado
+		if(user == null && !urlParaAutenticar.equalsIgnoreCase("/LoginServlet") ) { // usuï¿½rio nao logado
 			
 			RequestDispatcher dispatcher = request.getRequestDispatcher("index.jsp?url="+urlParaAutenticar);
 			dispatcher.forward(request, response);
@@ -51,18 +51,18 @@ public class FilterAutenticacao implements Filter {
 			
 			return; // para o processo  para redirecionar
 		}
-		//EXECUTA AS AÇÕES DO REQUEST E RESPONSE
+		//EXECUTA AS Aï¿½ï¿½ES DO REQUEST E RESPONSE
 		chain.doFilter(request, response);
-		System.out.println("interceptando");
+		
 		
 	}
 	
-	// EXECUTA ALGUMA COISA QUANDO A APLICACAO È INICIADA 
+	// EXECUTA ALGUMA COISA QUANDO A APLICACAO ï¿½ INICIADA 
 	
 	@Override
 	public void init(FilterConfig filterConfig) throws ServletException {
 		// TODO Auto-generated method stub
-		Filter.super.init(filterConfig);
+		
 	}
 
 }

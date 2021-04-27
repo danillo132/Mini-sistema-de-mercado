@@ -1,0 +1,31 @@
+@charset "ISO-8859-1";
+
+
+#myprogress{
+	width: 100%;
+	background-color: #ddd;
+	border-radius: 5px;
+	
+}
+
+#myBar{
+	width: 1%;
+	height: 30px;
+	background-color: #4CAF50;
+	border-radius: 5px;
+	
+}
+
+.ui-progressbar{
+	position: relative;
+	
+}
+
+.progress-label{
+	position: relative;
+	left: 50%;
+	top: 4px;
+	font-weight: bold;
+	text-shadow: 1px 1px 0 #fff;
+	
+}

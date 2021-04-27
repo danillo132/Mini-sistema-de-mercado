@@ -4,7 +4,7 @@
 
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
-	
+
 
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html>
@@ -13,6 +13,10 @@
 <meta charset="ISO-8859-1">
 <title>Cadastrar Usuário</title>
 <link rel="stylesheet" href="resources/css/cadastro.css">
+<link rel="stylesheet"
+	href="resources/css/table.css">
+	<script type="text/javascript" src="https://code.jquery.com/jquery-3.5.1.js"></script>
+<script  src="//cdn.datatables.net/1.10.24/js/jquery.dataTables.min.js">
 
 
 <!-- Adicionando JQuery -->
@@ -33,7 +37,7 @@
 						src="resources/img/homie.png"></a></td>
 
 				<td>MARKET SYSTEM</td>
-				<td><a href="index.jsp"><img alt="logout"
+				<td><a href="salvarUsuario?deslogar=true"><img alt="logout"
 						src="resources/img/logout.png"></a></td>
 			</tr>
 
@@ -121,9 +125,10 @@
 					<tr>
 						<td>Foto:</td>
 						<td><input type="file" name="foto"></td>
+
 						<td><label class="check">Ativo <input type="checkbox"
 								id="ativo" name="ativo"
-							  	<%if (request.getAttribute("user") != null) {
+								<%if (request.getAttribute("user") != null) {
 
 				BeanCursoJsp usuario = (BeanCursoJsp) request.getAttribute("user");
 				if (usuario.isAtivo()) {
@@ -131,9 +136,9 @@
 					out.print("checked=\'checked\'");
 					out.print(" ");
 				}
-			}%> >
-			
-			
+			}%>>
+
+
 								<span class="checkmark"></span>
 						</label></td>
 					</tr>
@@ -145,10 +150,7 @@
 
 						<td><label class="radius"> <input type="radio"
 								name="sexo"
-								<%
-								 	
-								
-								if (request.getAttribute("user") != null) {
+								<%if (request.getAttribute("user") != null) {
 
 				BeanCursoJsp usuario = (BeanCursoJsp) request.getAttribute("user");
 				if (usuario.getSexo().equalsIgnoreCase("masculino")) {
@@ -158,7 +160,7 @@
 					out.print("");
 				}
 
-			} %>
+			}%>
 								id="sexo" value="masculino">masculino <span
 								class="checkmark"></span>
 						</label> <label class="radius"> <input type="radio" name="sexo"
@@ -187,9 +189,7 @@
 
 
 								<option value="administrador"
-									<%
-									
-									if (request.getAttribute("user") != null) {
+									<%if (request.getAttribute("user") != null) {
 
 				BeanCursoJsp usuario = (BeanCursoJsp) request.getAttribute("user");
 				if (usuario.getPerfil().equalsIgnoreCase("adiministrador")) {
@@ -197,8 +197,7 @@
 					out.print("selected=\"selected\"");
 					out.print(" ");
 				}
-			}  %>
-			>Administrador</option>
+			}%>>Administrador</option>
 
 
 
@@ -256,32 +255,36 @@
 			</form>
 		</div>
 	</div>
-	
-	
-	
+
+
+
 	<div class="consult-page">
 		<h3 style="color: white;">${pesquisa}</h3>
-		
+
 		<div class="consult">
 
 			<h3>Pesquisar usuário</h3>
 
 			<form action="servletPesquisa" method="post" class="consult-form"
-				id="formConsult" >
+				id="formConsult">
 				<table>
 					<tr>
-						<td>Descrição: </td>
-						<td> <input  class="descricao" type="text" id="descricaoconsulta" name="descricaoconsulta" placeholder="Nome do usuário"></td>
-						<td> <button type="submit" value="pesquisar"> Pesquisar</button> </td>
+						<td>Descrição:</td>
+						<td><input class="descricao" type="text"
+							id="descricaoconsulta" name="descricaoconsulta"
+							placeholder="Nome do usuário"></td>
+						<td>
+							<button type="submit" value="pesquisar">Pesquisar</button>
+						</td>
 					</tr>
-					
+
 
 
 				</table>
 
-				
-			
-				
+
+
+
 			</form>
 		</div>
 	</div>
@@ -292,76 +295,79 @@
 		<div class="container-table100">
 			<div class="wrap-table100">
 				<div class="table100">
-					<table class="tabela">
-						<tr>
-							<th>ID</th>
-							<th>Email</th>
-							<th>Nome</th>
-							<th>Foto</th>
-							<th>Currículo</th>
-
-							<th>Cep</th>
-
-
-
-
-							<th>Delete</th>
-							<th>Editar</th>
-							<th>fones</th>
-						</tr>
-						<c:forEach items="${usuarios}" var="user">
+					<table class="tabela" id="example">
+						<thead>
 							<tr>
+								<th>ID</th>
+								<th>Email</th>
+								<th>Nome</th>
+								<th>Foto</th>
+								<th>Currículo</th>
 
-								<td style="width: 150px"><c:out value="${user.id}"></c:out></td>
-								<td style="width: 150px"><c:out value="${user.login}"></c:out>
-								</td>
-								<td style="width: 150px"><c:out value="${user.nome}"></c:out></td>
-
-
-								<c:if test="${user.fotoBase64Miniatura.isEmpty() == false}">
-									<td style="width: 150px"><a
-										href="salvarUsuario?acao=download&tipo=imagem&user=${user.id}"><img
-											src="<c:out value="${user.fotoBase64Miniatura}"></c:out>"
-											alt="ImagemUser" title="ImagemUser"></a></td>
-								</c:if>
-								<c:if test="${user.fotoBase64Miniatura == null}">
-									<td style="width: 150px"><img
-										src="resources/img/usuario.png" alt="ImagemUser"
-										title="ImagemUser"></td>
-								</c:if>
-								<c:if test="${user.curriculoBase64.isEmpty() == false}">
-									<td style="width: 150px"><a
-										href="salvarUsuario?acao=download&tipo=curriculo&user=${user.id}"><img
-											alt="curriculo" src="resources/img/pdf.png" title="Currículo">
-									</a></td>
-								</c:if>
-
-								<c:if test="${user.curriculoBase64 == null}">
-									<td style="width: 150px"><img alt="curriculo"
-										src="resources/img/vazio.png" title="Currículo"></td>
-								</c:if>
-
-								<td style="width: 150px"><c:out value="${user.cep}"></c:out></td>
+								<th>Cep</th>
 
 
 
 
-								<td><a href="salvarUsuario?acao=delete&user=${user.id}"
-									onclick="return confirm('Confirmar a exclusão?')"> <img
-										alt="" src="resources/img/favicon.ico" title="Excluir">
-								</a></td>
-								<td><a href="salvarUsuario?acao=editar&user=${user.id}">
-										<img alt="" src="resources/img/editar.ico" title="Editar">
-								</a></td>
-
-								<td><a href="salvarTelefones?acao=addFone&user=${user.id}">
-										<img alt="telefones" src="resources/img/fone.png"
-										title="Telefones">
-								</a></td>
-
+								<th>Delete</th>
+								<th>Editar</th>
+								<th>fones</th>
 							</tr>
-						</c:forEach>
+						</thead>
+						<tbody>
+							<c:forEach items="${usuarios}" var="user">
+								<tr>
 
+									<td style="width: 150px"><c:out value="${user.id}"></c:out></td>
+									<td style="width: 150px"><c:out value="${user.login}"></c:out>
+									</td>
+									<td style="width: 150px"><c:out value="${user.nome}"></c:out></td>
+
+
+									<c:if test="${user.fotoBase64Miniatura.isEmpty() == false}">
+										<td style="width: 150px"><a
+											href="salvarUsuario?acao=download&tipo=imagem&user=${user.id}"><img
+												src="<c:out value="${user.fotoBase64Miniatura}"></c:out>"
+												alt="ImagemUser" title="ImagemUser"></a></td>
+									</c:if>
+									<c:if test="${user.fotoBase64Miniatura == null}">
+										<td style="width: 150px"><img
+											src="resources/img/usuario.png" alt="ImagemUser"
+											title="ImagemUser"></td>
+									</c:if>
+									<c:if test="${user.curriculoBase64.isEmpty() == false}">
+										<td style="width: 150px"><a
+											href="salvarUsuario?acao=download&tipo=curriculo&user=${user.id}"><img
+												alt="curriculo" src="resources/img/pdf.png"
+												title="Currículo"> </a></td>
+									</c:if>
+
+									<c:if test="${user.curriculoBase64 == null}">
+										<td style="width: 150px"><img alt="curriculo"
+											src="resources/img/vazio.png" title="Currículo"></td>
+									</c:if>
+
+									<td style="width: 150px"><c:out value="${user.cep}"></c:out></td>
+
+
+
+
+									<td><a href="salvarUsuario?acao=delete&user=${user.id}"
+										onclick="return confirm('Confirmar a exclusão?')"> <img
+											alt="" src="resources/img/favicon.ico" title="Excluir">
+									</a></td>
+									<td><a href="salvarUsuario?acao=editar&user=${user.id}">
+											<img alt="" src="resources/img/editar.ico" title="Editar">
+									</a></td>
+
+									<td><a href="salvarTelefones?acao=addFone&user=${user.id}">
+											<img alt="telefones" src="resources/img/fone.png"
+											title="Telefones">
+									</a></td>
+
+								</tr>
+							</c:forEach>
+						</tbody>
 					</table>
 				</div>
 			</div>
@@ -409,6 +415,10 @@
 					});
 
 		}
+
+		$(document).ready(function() {
+			$('#example').DataTable();
+		});
 	</script>
 
 </body>

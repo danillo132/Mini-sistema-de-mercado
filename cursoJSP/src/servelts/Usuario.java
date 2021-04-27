@@ -16,11 +16,12 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import javax.servlet.http.Part;
 import javax.xml.bind.DatatypeConverter;
 
+import org.apache.commons.fileupload.servlet.ServletFileUpload;
 import org.apache.tomcat.util.codec.binary.Base64;
-import org.apache.tomcat.util.http.fileupload.servlet.ServletFileUpload;
 
 import beans.BeanCursoJsp;
 import dao.DaoUsuario;
@@ -41,6 +42,17 @@ public class Usuario extends HttpServlet {
 			throws ServletException, IOException {
 
 		try {
+			
+			
+			if(Boolean.parseBoolean(request.getParameter("deslogar")) == true) {
+				HttpServletRequest req = (HttpServletRequest) request;
+				HttpSession session = req.getSession();
+				session.invalidate();
+				response.sendRedirect("index.jsp");
+				return;
+			}
+			
+			
 			String acao = request.getParameter("acao");
 			String user = request.getParameter("user");
 
@@ -97,7 +109,7 @@ public class Usuario extends HttpServlet {
 					//coloca os bytes em um objeto de entrada para processar
 					InputStream is = new ByteArrayInputStream(fileBytes);
 					
-					//início da resposta para o navegador
+					//inÃ­cio da resposta para o navegador
 					
 					int read = 0;
 					
@@ -195,7 +207,7 @@ public class Usuario extends HttpServlet {
 						usuario.setFotoBase64(fotoBase64);
 						usuario.setContentType(imagemFoto.getContentType());
 						
-						//Início da miniatura da Imagem
+						//InÃ­cio da miniatura da Imagem
 						
 						//Transforma emum em BufferedImage
 						

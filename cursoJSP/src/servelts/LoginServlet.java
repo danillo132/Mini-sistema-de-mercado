@@ -27,7 +27,18 @@ public class LoginServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
-		response.getWriter().append("Served at: ").append(request.getContextPath());
+		
+		if(Boolean.parseBoolean(request.getParameter("deslogar")) == true) {
+			
+			HttpServletRequest req = (HttpServletRequest) request;
+			HttpSession session = req.getSession();
+			session.invalidate();
+			
+			response.sendRedirect("index.jsp");
+			return;
+		}
+		
+		
 		doPost(request, response);
 
 	}

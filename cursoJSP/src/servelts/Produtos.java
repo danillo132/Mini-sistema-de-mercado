@@ -8,6 +8,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import beans.BeanProdutos;
 import dao.daoProdutos;
@@ -30,6 +31,18 @@ public class Produtos extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		try {
+			
+			
+			
+			if(Boolean.parseBoolean(request.getParameter("deslogar")) == true) {
+				
+				HttpServletRequest req = (HttpServletRequest) request;
+				HttpSession session = req.getSession();
+				session.invalidate();
+				response.sendRedirect("index.jsp");
+				
+				return;
+			}
 			
 			String acao = request.getParameter("acao");
 			String prod = request.getParameter("prod");

@@ -27,13 +27,18 @@
 			</td>
 			<td>
 			<a href="salvarProdutos?acao=listarprodutos"><img alt="produtos" src="resources/img/produtos.png" class="img"></a>
+			
 	</td>
+	
+	
 	<td>
-<a href="index.jsp"><img alt="logout" src="resources/img/logout.png"></a>
+<a href="LoginServlet?deslogar=true"><img alt="logout" src="resources/img/logout.png"></a>
 			</td>
 			</tr>	
 			<tr>
-			<td>Cadastro usuários</td><td>Cadastro produtos</td><td>Sair</td>
+			<td>Cadastro usuários</td><td>Cadastro produtos</td><td>Sair</td><td> <a href="paginaPai.jsp">Load page</a></td>
+			<td> <a href="upload.jsp">uploads imgs</a></td>
+			<td> <a href="dataTable.jsp">DataTable JQuery</a></td>
 			</tr>		
 	
 </table>
