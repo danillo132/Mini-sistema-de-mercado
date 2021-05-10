@@ -14,7 +14,9 @@ import net.sf.jasperreports.engine.JasperPrint;
 import net.sf.jasperreports.engine.JasperReport;
 import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource;
 import net.sf.jasperreports.engine.export.JRPdfExporter;
+import net.sf.jasperreports.engine.export.JRXlsExporter;
 import net.sf.jasperreports.engine.util.JRLoader;
+import net.sf.jasperreports.compilers.ReportExpressionEvaluationData;
 
 public class RelatorioService  implements Serializable{
 
@@ -31,7 +33,7 @@ public class RelatorioService  implements Serializable{
 	
 	
 	public String gerarRelatorio(List<?> listaDataBeanColletion, HashMap parametrosRelatorio, 
-			String nomeRelatorioJasper, String nomeRelatorioSaida, ServletContext servletContext) throws Exception {
+			String nomeRelatorioJasper, String nomeRelatorioSaida, ServletContext servletContext, String tipoExportar) throws Exception {
 		
 		//CRIA A LISTA DE COLLECTIONSDATASOURCE QUE CARREGAM OS DADOS PARA O RELATORIO
 		JRBeanCollectionDataSource jrbcds = new JRBeanCollectionDataSource(listaDataBeanColletion);
@@ -72,9 +74,19 @@ public class RelatorioService  implements Serializable{
 			
 			JasperPrint print = JasperFillManager.fillReport(report, parametrosRelatorio, jrbcds);
 			
-			JRPdfExporter exporter = new JRPdfExporter();
 			
-			caminhoArquivoRelatorio =  caminhoRelatorio + SEPARATOR + nomeRelatorioSaida + ".pdf";
+			if(tipoExportar.equalsIgnoreCase("pdf")) {
+				
+				 exporter = new JRPdfExporter();
+				
+			}else if (tipoExportar.equalsIgnoreCase("xls")) {
+				
+				 exporter = new JRXlsExporter();
+			}
+			
+			
+			
+			caminhoArquivoRelatorio =  caminhoRelatorio + SEPARATOR + nomeRelatorioSaida + "." + tipoExportar;
 			
 			
 			

@@ -15,7 +15,7 @@
 	<div class="login-page">
 
 		<div class="form">
-		<h3>Market System</h3>
+		<h3 >Market System</h3>
 	<img alt="" src="resources/img/carrinho.png">
 			<form action="LoginServlet" method="post" class="login-form">
 			<input  type="hidden"  readonly="readonly" id="url" name="url" value="<%= request.getParameter("url") %>">

@@ -29,17 +29,32 @@
 			<a href="salvarProdutos?acao=listarprodutos"><img alt="produtos" src="resources/img/produtos.png" class="img"></a>
 			
 	</td>
-	
+	<td>
+			<a href="relatorios.jsp"> <img alt="relatorios" src="resources/img/relatorio.png"> </a>
+			</td>
 	
 	<td>
-<a href="LoginServlet?deslogar=true"><img alt="logout" src="resources/img/logout.png"></a>
+<a href="LoginServlet?deslogar=true"><img alt="logout" src="resources/img/logout.png"></a> 
 			</td>
+			
+			
 			</tr>	
 			<tr>
-			<td>Cadastro usuários</td><td>Cadastro produtos</td><td>Sair</td><td> <a href="paginaPai.jsp">Load page</a></td>
+			<td>Cadastro usuários</td><td>Cadastro produtos</td>
+			<td>Relatórios</td>
+			<td>Sair</td>
+			<td>  <a href="ganttview.jsp"> Gantt VIew</a></td>
+			
+			
+			
+			</tr>	
+			<tr>
+			<td> <a href="paginaPai.jsp">Load page</a></td>
 			<td> <a href="upload.jsp">uploads imgs</a></td>
 			<td> <a href="dataTable.jsp">DataTable JQuery</a></td>
-			</tr>		
+			<td> <a href="datas.jsp">Calculando datas</a></td>
+			<td> <a href="calendar.jsp">Calendário</a></td>
+			</tr>	
 	
 </table>
 

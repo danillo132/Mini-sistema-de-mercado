@@ -46,12 +46,10 @@ public class ServletDownloadFile extends HttpServlet {
 			String tipoExportar = request.getParameter("tipoExportar");
 			List<BeanCursoJsp> usuarios = daoUsuario.listar();
 			
-			List dados = new ArrayList();
-			dados.add(usuarios);
 			
 			
-			String fileUrl = relatorioService.gerarRelatorio(dados, new HashMap(), "Rel_usuario", "Rel_usuario", 
-					context);
+			
+			String fileUrl = relatorioService.gerarRelatorio(usuarios, new HashMap(), "Rel_usuario", "Rel_usuario", context, tipoExportar);
 			
 			//CONSTRUIR O CAMINHO COMPLETO E ABSOLUTO DO RELATORIO
 			

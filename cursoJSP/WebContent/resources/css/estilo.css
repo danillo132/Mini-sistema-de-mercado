@@ -47,6 +47,7 @@
   cursor: pointer;
   border-radius: 16px;
   font-weight: normal;
+  
 }
 .form button:hover,.form button:active,.form button:focus {
   background: #43A047;
